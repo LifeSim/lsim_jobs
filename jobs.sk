@@ -1,0 +1,35 @@
+# Chef Job // req. Cooking level 5
+on rightclick:
+  if target block == to be decided:
+    if {level::Cooking::%getUUID(player)%} >= 5:
+      set {job::%getUUID(player)%} to "Chef"
+every 1 minute:
+  loop all players:
+    if {job::%getUUID(player)%} == "Chef":
+      chance of 50%:
+        message "&eA customer wants &6&lBurger&e!" to loop-player
+        set {toCook} to "Burger"
+      chance of 50%:
+        message "&eA customer wants &6&lSoup&e!" to loop-player
+on rightclick on pink terracotta:
+  if {job::%getUUID(player)%} == "Chef":
+    if player's held item == bread named "&6Bun":
+      set player's held item to raw steak named "&cUncooked Burger"
+on rightclick on furnace:
+  if {job::%getUUID(player)%} == "Chef":
+    if player's held item == raw steak named "&cUncooked Burger":
+      message "&6Cooking..."
+      wait 5 seconds
+      remove all steak from player's inventory
+      set player's held item to steak named "&aBurger (Rightclick on Serving Desk!)"
+on rightclick on blue teracotta:
+  if {job::%getUUID(player)%} == "Chef":
+    if {toCook} == "Burger":
+      if player's held item == steak named "&aBurger (Rightclick on Serving Desk!)"
+        message "&a+$5"
+        addBal(player, 5)
+        set player's held item to air
+# Office Worker
+
+on load:
+  log warn "&cOffice Worker is not yet complete!"
